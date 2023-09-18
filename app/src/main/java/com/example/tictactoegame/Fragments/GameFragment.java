@@ -8,15 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.example.tictactoegame.R;
+import com.google.android.material.button.MaterialButton;
 
 public class GameFragment extends Fragment {
 
     private GridLayout ticTacToeBoard;
-    private ImageView[][] squares;
+    private MaterialButton[][] squares;
     private boolean xTurn = true; // True for X, False for O
     private boolean gameActive = true; // Indicates if the game is still active
 
@@ -31,23 +30,20 @@ public class GameFragment extends Fragment {
         return view;
     }
 
+    // Initialize the game board and set up click listeners for each square
+    private void initializeBoard() {
+        squares = new MaterialButton[3][3];
+        Log.d("MainActivity", "This is a debug message");
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                int resourceId = getResources().getIdentifier("square_" + row + col, "id", getActivity().getPackageName());
+                squares[row][col] = ticTacToeBoard.findViewById(resourceId);
 
-     //Initialize the game board and set up click listeners for each square
-     private void initializeBoard() {
-         RelativeLayout[][] squares = new RelativeLayout[3][3];
-         Log.d("MainActivity", "This is a debug message");
-
-         for (int row = 0; row < 3; row++) {
-             for (int col = 0; col < 3; col++) {
-                 int resourceId = getResources().getIdentifier("square_" + row + col, "id", getActivity().getPackageName());
-                 squares[row][col] = ticTacToeBoard.findViewById(resourceId);
-
-                 // Create a click listener for the current square
-                 squares[row][col].setOnClickListener(createSquareClickListener(row, col));
-             }
-         }
-     }
-
+                // Create a click listener for the current square
+                squares[row][col].setOnClickListener(createSquareClickListener(row, col));
+            }
+        }
+    }
 
     // Create a click listener for a square at the given row and column
     private View.OnClickListener createSquareClickListener(final int row, final int col) {
@@ -59,20 +55,19 @@ public class GameFragment extends Fragment {
         };
     }
 
-
     // Handle square click event
-    private void onSquareClick(ImageView square) {
-//        if (!gameActive) {
-//            return; // Game is over, do nothing
-//        }
+    private void onSquareClick(MaterialButton square) {
+        if (!gameActive) {
+            return; // Game is over, do nothing
+        }
 
         // Check if the square is empty
-        if (square.getDrawable() == null) {
+        if (square.getText() == null || square.getText().toString().isEmpty()) {
             // Set X or O based on the current turn
             if (xTurn) {
-                square.setImageResource(R.drawable.ic_x);
+                square.setText("X");
             } else {
-                square.setImageResource(R.drawable.ic_o);
+                square.setText("O");
             }
 
             // Check for a win or draw
@@ -115,11 +110,11 @@ public class GameFragment extends Fragment {
         return false;
     }
 
-    // Helper method to check if three ImageView elements have the same non-null drawable
-    private boolean checkThree(ImageView square1, ImageView square2, ImageView square3) {
-        return square1.getDrawable() != null &&
-                square1.getDrawable().getConstantState() == square2.getDrawable().getConstantState() &&
-                square1.getDrawable().getConstantState() == square3.getDrawable().getConstantState();
+    // Helper method to check if three MaterialButton elements have the same text
+    private boolean checkThree(MaterialButton square1, MaterialButton square2, MaterialButton square3) {
+        return square1.getText() != null &&
+                square1.getText().toString().equals(square2.getText().toString()) &&
+                square1.getText().toString().equals(square3.getText().toString());
     }
 
     // Check for a draw
@@ -127,14 +122,13 @@ public class GameFragment extends Fragment {
         // Check if all squares are filled (no empty squares)
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                if (squares[row][col].getDrawable() == null) {
+                if (squares[row][col].getText() == null || squares[row][col].getText().toString().isEmpty()) {
                     return false; // At least one square is empty
                 }
             }
         }
         return true; // All squares are filled, indicating a draw
     }
-
 
     // Display a win message
     private void showWinMessage(String winner) {

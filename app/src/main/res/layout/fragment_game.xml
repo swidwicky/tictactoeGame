@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,202 +14,121 @@
         android:columnCount="3">
 
         <!-- Cell 00 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_00"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_00_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 01 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_01"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_01_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 02 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_02"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_02_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 10 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_10"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_10_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 11 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_11"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_11_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 12 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_12"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_12_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 20 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_20"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_20_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 21 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_21"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_21_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
         <!-- Cell 22 -->
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/square_22"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/tic_tac_toe_square_background"
-            android:contentDescription="Tic Tac Toe Square">
-
-            <!-- Add your custom content for this cell -->
-            <!-- Example: ImageView for X or O symbol -->
-            <ImageView
-                android:id="@+id/square_22_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            app:backgroundTint="@color/colors"
+            android:contentDescription="Tic Tac Toe Square"
+            android:text=""
+            android:textSize="48sp" />
 
     </GridLayout>
 </FrameLayout>
