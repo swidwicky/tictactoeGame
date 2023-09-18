@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -8,7 +7,7 @@
     android:focusable="true"
     android:contentDescription="Tic Tac Toe Square">
 
-    <!-- X symbol (assuming you have ic_x.png in your "res/drawable" directory) -->
+    <!-- X symbol (initially set to "gone") -->
     <ImageView
         android:id="@+id/xSymbol"
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         android:scaleType="center"
         android:layout_centerInParent="true" />
 
-    <!-- O symbol (assuming you have ic_o.png in your "res/drawable" directory) -->
+    <!-- O symbol (initially set to "gone") -->
     <ImageView
         android:id="@+id/oSymbol"
         android:layout_width="match_parent"
