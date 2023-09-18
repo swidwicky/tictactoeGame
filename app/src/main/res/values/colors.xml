@@ -1,4 +1,3 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Define your colors here -->
-    <color name="you_background_color">#FF5722</color>
+    <color name="your_background_color">#FF5722</color>
 </resources>
