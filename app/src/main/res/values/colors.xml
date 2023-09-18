@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Define your colors here -->
+    <color name="you_background_color">#FF5722</color>
 </resources>

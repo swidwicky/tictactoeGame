@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -86,7 +86,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -99,7 +99,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -112,7 +112,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
@@ -125,7 +125,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/colors"
+            app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
             android:textSize="48sp" />
