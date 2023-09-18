@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.GameFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <GridLayout
+        android:id="@+id/ticTacToeBoard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rowCount="3"
+        android:columnCount="3">
+
+        <!-- Include the Tic Tac Toe square XML layout here for each cell -->
+        <include
+            android:id="@+id/square_00"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_01"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_02"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_10"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_11"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_12"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_20"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_21"
+            layout="@layout/tic_tac_toe_square" />
+        <include
+            android:id="@+id/square_22"
+            layout="@layout/tic_tac_toe_square" />
+    </GridLayout>
+</FrameLayout>

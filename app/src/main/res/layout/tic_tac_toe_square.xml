@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tic_tac_toe_square_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:contentDescription="Tic Tac Toe Square">
+
+    <!-- X symbol (assuming you have ic_x.png in your "res/drawable" directory) -->
+    <ImageView
+        android:id="@+id/xSymbol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_x"
+    android:visibility="gone"
+    android:scaleType="center" />
+
+    <!-- O symbol (assuming you have ic_o.png in your "res/drawable" directory) -->
+    <ImageView
+        android:id="@+id/oSymbol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_o"
+    android:visibility="gone"
+    android:scaleType="center" />
+
+</RelativeLayout>
