@@ -2,11 +2,14 @@ package com.example.tictactoegame.Fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.example.tictactoegame.R;
 
@@ -29,33 +32,39 @@ public class GameFragment extends Fragment {
     }
 
 
-    // Initialize the game board and set up click listeners for each square
-    private void initializeBoard() {
-        squares = new ImageView[3][3];
+     //Initialize the game board and set up click listeners for each square
+     private void initializeBoard() {
+         RelativeLayout[][] squares = new RelativeLayout[3][3];
+         Log.d("MainActivity", "This is a debug message");
 
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                int resourceId = getResources().getIdentifier("square_" + row + col, "id", getActivity().getPackageName());
-                squares[row][col] = ticTacToeBoard.findViewById(resourceId);
+         for (int row = 0; row < 3; row++) {
+             for (int col = 0; col < 3; col++) {
+                 int resourceId = getResources().getIdentifier("square_" + row + col, "id", getActivity().getPackageName());
+                 squares[row][col] = ticTacToeBoard.findViewById(resourceId);
 
-                final int finalRow = row;
-                final int finalCol = col;
+                 // Create a click listener for the current square
+                 squares[row][col].setOnClickListener(createSquareClickListener(row, col));
+             }
+         }
+     }
 
-                squares[row][col].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onSquareClick(squares[finalRow][finalCol]);
-                    }
-                });
+
+    // Create a click listener for a square at the given row and column
+    private View.OnClickListener createSquareClickListener(final int row, final int col) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSquareClick(squares[row][col]);
             }
-        }
+        };
     }
+
 
     // Handle square click event
     private void onSquareClick(ImageView square) {
-        if (!gameActive) {
-            return; // Game is over, do nothing
-        }
+//        if (!gameActive) {
+//            return; // Game is over, do nothing
+//        }
 
         // Check if the square is empty
         if (square.getDrawable() == null) {

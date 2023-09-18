@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.GameFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <GridLayout
         android:id="@+id/ticTacToeBoard"
         android:layout_width="match_parent"
@@ -13,33 +12,73 @@
         android:rowCount="3"
         android:columnCount="3">
 
-        <!-- Include the Tic Tac Toe square XML layout here for each cell -->
-        <include
+        <!-- Cell 00 -->
+        <RelativeLayout
             android:id="@+id/square_00"
-            layout="@layout/tic_tac_toe_square" />
-        <include
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/tic_tac_toe_square_background"
+            android:contentDescription="Tic Tac Toe Square">
+
+            <!-- Add your custom content for this cell -->
+            <!-- Example: ImageView for X or O symbol -->
+            <ImageView
+                android:id="@+id/square_00_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <!-- Cell 01 -->
+        <RelativeLayout
             android:id="@+id/square_01"
-            layout="@layout/tic_tac_toe_square" />
-        <include
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/tic_tac_toe_square_background"
+            android:contentDescription="Tic Tac Toe Square">
+
+            <!-- Add your custom content for this cell -->
+            <!-- Example: ImageView for X or O symbol -->
+            <ImageView
+                android:id="@+id/square_01_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <!-- Cell 02 -->
+        <RelativeLayout
             android:id="@+id/square_02"
-            layout="@layout/tic_tac_toe_square" />
-        <include
-            android:id="@+id/square_10"
-            layout="@layout/tic_tac_toe_square" />
-        <include
-            android:id="@+id/square_11"
-            layout="@layout/tic_tac_toe_square" />
-        <include
-            android:id="@+id/square_12"
-            layout="@layout/tic_tac_toe_square" />
-        <include
-            android:id="@+id/square_20"
-            layout="@layout/tic_tac_toe_square" />
-        <include
-            android:id="@+id/square_21"
-            layout="@layout/tic_tac_toe_square" />
-        <include
-            android:id="@+id/square_22"
-            layout="@layout/tic_tac_toe_square" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/tic_tac_toe_square_background"
+            android:contentDescription="Tic Tac Toe Square">
+
+            <!-- Add your custom content for this cell -->
+            <!-- Example: ImageView for X or O symbol -->
+            <ImageView
+                android:id="@+id/square_02_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <!-- Repeat the above layout for other cells (e.g., square_10, square_11, etc.) -->
+
     </GridLayout>
 </FrameLayout>

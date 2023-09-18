@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ic_x"
-    android:visibility="gone"
-    android:scaleType="center" />
+        android:visibility="gone"
+        android:scaleType="center"
+        android:layout_centerInParent="true" />
 
     <!-- O symbol (assuming you have ic_o.png in your "res/drawable" directory) -->
     <ImageView
@@ -23,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ic_o"
-    android:visibility="gone"
-    android:scaleType="center" />
+        android:visibility="gone"
+        android:scaleType="center"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>
