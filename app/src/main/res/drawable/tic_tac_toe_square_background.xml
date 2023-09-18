@@ -5,7 +5,16 @@
             android:shape="rectangle">
             <stroke
                 android:width="5dp"
-            android:color="#000000" /> <!-- Border color (black) -->
+                android:color="#000000" /> <!-- Border color (black) -->
+        </shape>
+    </item>
+
+    <!-- Grid Lines -->
+    <item android:id="@+id/grid_lines">
+        <shape
+            android:shape="rectangle">
+            <solid android:color="#00000000" /> <!-- Transparent color for the grid lines -->
+            <size android:width="1dp" android:height="1dp" /> <!-- Grid line thickness -->
         </shape>
     </item>
 
