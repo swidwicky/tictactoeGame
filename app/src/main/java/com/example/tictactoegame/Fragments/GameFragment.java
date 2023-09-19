@@ -63,6 +63,13 @@ public class GameFragment extends Fragment {
             } else {
                 playerWins("Player O"); // Player O wins
             }
+        } else if (checkForLoss()) {
+            // Player X or O has lost, handle the loss
+            if (player1Turn) {
+                playerLoses("Player X"); // Player X loses
+            } else {
+                playerLoses("Player O"); // Player O loses
+            }
         } else if (roundCount == 9) {
             // It's a draw
             declareDraw();
@@ -71,7 +78,6 @@ public class GameFragment extends Fragment {
             player1Turn = !player1Turn;
         }
     }
-
 
     private boolean checkForWin() {
         // Check rows, columns, and diagonals for a win
@@ -135,19 +141,79 @@ public class GameFragment extends Fragment {
         return false; // No winner yet
     }
 
+    private boolean checkForLoss() {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            if (buttons[i][0].isXSymbol() && buttons[i][1].isXSymbol() && buttons[i][2].isXSymbol()) {
+                // Player 1 (X) loses
+                playerLoses("Player 1");
+                return true;
+            }
+            if (buttons[i][0].isOSymbol() && buttons[i][1].isOSymbol() && buttons[i][2].isOSymbol()) {
+                // Player 2 (O) loses
+                playerLoses("Player 2");
+                return true;
+            }
+        }
 
-    // Inside your GameFragment.java
-    private void playerWins(String player) {
-        // Create and show the win message dialog
-        WinDialogFragment winDialogFragment = new WinDialogFragment();
-        winDialogFragment.show(getFragmentManager(), "WinDialog");
-        resetGame();
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (buttons[0][i].isXSymbol() && buttons[1][i].isXSymbol() && buttons[2][i].isXSymbol()) {
+                // Player 1 (X) loses
+                playerLoses("Player 1");
+                return true;
+            }
+            if (buttons[0][i].isOSymbol() && buttons[1][i].isOSymbol() && buttons[2][i].isOSymbol()) {
+                // Player 2 (O) loses
+                playerLoses("Player 2");
+                return true;
+            }
+        }
+
+        // Check diagonals
+        if (buttons[0][0].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][2].isXSymbol()) {
+            // Player 1 (X) loses
+            playerLoses("Player 1");
+            return true;
+        }
+        if (buttons[0][2].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][0].isXSymbol()) {
+            // Player 1 (X) loses
+            playerLoses("Player 1");
+            return true;
+        }
+        if (buttons[0][0].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][2].isOSymbol()) {
+            // Player 2 (O) loses
+            playerLoses("Player 2");
+            return true;
+        }
+        if (buttons[0][2].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][0].isOSymbol()) {
+            // Player 2 (O) loses
+            playerLoses("Player 2");
+            return true;
+        }
+
+        return false; // No loss yet
     }
 
 
+    private void playerWins(String player) {
+        String winMessage = player + " Wins!";
+        CustomDialogFragment winDialog = CustomDialogFragment.newInstance("WON", winMessage);
+        winDialog.show(getFragmentManager(), "win_dialog");
+        resetGame();
+    }
+
+    private void playerLoses(String player) {
+        String loseMessage = player + " Loses!";
+        CustomDialogFragment loseDialog = CustomDialogFragment.newInstance("LOST", loseMessage);
+        loseDialog.show(getFragmentManager(), "lose_dialog");
+        resetGame();
+    }
+
     private void declareDraw() {
-        // Implement logic for a draw
-        Toast.makeText(getActivity(), "It's a draw!", Toast.LENGTH_SHORT).show();
+        String drawMessage = "It's a Draw!";
+        CustomDialogFragment drawDialog = CustomDialogFragment.newInstance("DRAW", drawMessage);
+        drawDialog.show(getFragmentManager(), "draw_dialog");
         resetGame();
     }
 
