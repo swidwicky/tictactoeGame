@@ -24,7 +24,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/square_01" />
 
         <!-- Cell 01 -->
         <com.google.android.material.button.MaterialButton
@@ -37,7 +41,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_11"
+            app:layout_constraintStart_toEndOf="@id/square_00"
+            app:layout_constraintEnd_toStartOf="@id/square_02" />
 
         <!-- Cell 02 -->
         <com.google.android.material.button.MaterialButton
@@ -50,7 +58,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_12"
+            app:layout_constraintStart_toEndOf="@id/square_01"
+            app:layout_constraintEnd_toStartOf="@id/square_10" />
 
         <!-- Cell 10 -->
         <com.google.android.material.button.MaterialButton
@@ -63,7 +75,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/square_11" />
 
         <!-- Cell 11 -->
         <com.google.android.material.button.MaterialButton
@@ -76,7 +92,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_21"
+            app:layout_constraintStart_toEndOf="@id/square_10"
+            app:layout_constraintEnd_toStartOf="@id/square_12" />
 
         <!-- Cell 12 -->
         <com.google.android.material.button.MaterialButton
@@ -89,7 +109,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_22"
+            app:layout_constraintStart_toEndOf="@id/square_11"
+            app:layout_constraintEnd_toStartOf="@id/square_02" />
 
         <!-- Cell 20 -->
         <com.google.android.material.button.MaterialButton
@@ -102,7 +126,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/square_21" />
 
         <!-- Cell 21 -->
         <com.google.android.material.button.MaterialButton
@@ -115,7 +143,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_21"
+            app:layout_constraintStart_toEndOf="@id/square_20"
+            app:layout_constraintEnd_toStartOf="@id/square_22" />
 
         <!-- Cell 22 -->
         <com.google.android.material.button.MaterialButton
@@ -128,7 +160,11 @@
             app:backgroundTint="@color/your_background_color"
             android:contentDescription="Tic Tac Toe Square"
             android:text=""
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/square_22"
+            app:layout_constraintStart_toEndOf="@id/square_21"
+            app:layout_constraintEnd_toStartOf="@id/square_12" />
 
     </GridLayout>
 </FrameLayout>
