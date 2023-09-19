@@ -50,7 +50,8 @@ public class CustomDialogFragment extends DialogFragment {
         builder.setView(view)
                 .setPositiveButton("Close", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Handle the "Close" button click if needed
+                        // Dismiss the dialog, staying on the same fragment
+                        dialog.dismiss();
                     }
                 });
 

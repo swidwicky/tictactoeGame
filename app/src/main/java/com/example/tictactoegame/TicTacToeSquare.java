@@ -14,6 +14,13 @@ public class TicTacToeSquare extends View {
     private boolean isXSymbol = false;
     private boolean isOSymbol = false;
 
+    // Define an enum to represent the symbol
+    public enum Symbol {
+        NONE,
+        X,
+        O
+    }
+
     public TicTacToeSquare(Context context) {
         super(context);
         init();
@@ -71,6 +78,17 @@ public class TicTacToeSquare extends View {
         invalidate(); // Redraw the view when the symbol is cleared
     }
 
+    // New method to get the symbol
+    public Symbol getSymbol() {
+        if (isXSymbol) {
+            return Symbol.X;
+        } else if (isOSymbol) {
+            return Symbol.O;
+        } else {
+            return Symbol.NONE;
+        }
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -95,6 +113,4 @@ public class TicTacToeSquare extends View {
             }
         }
     }
-
-
 }

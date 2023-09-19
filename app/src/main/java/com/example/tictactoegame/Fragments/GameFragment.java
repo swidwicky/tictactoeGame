@@ -1,11 +1,15 @@
 package com.example.tictactoegame.Fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tictactoegame.R;
 import com.example.tictactoegame.TicTacToeSquare;
@@ -15,6 +19,12 @@ public class GameFragment extends Fragment {
     private TicTacToeSquare[][] buttons = new TicTacToeSquare[3][3];
     private boolean player1Turn = true; // Player 1 is X, Player 2 is O
     private int roundCount = 0;
+    private CustomDialogFragment winDialog;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true); // Retain this fragment across configuration changes
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,11 +44,33 @@ public class GameFragment extends Fragment {
                 });
             }
         }
-
+        // Restore game state if available
+        if (savedInstanceState != null) {
+            player1Turn = savedInstanceState.getBoolean("player1Turn");
+            roundCount = savedInstanceState.getInt("roundCount");
+            // Restore other game-related data as needed
+        }
         // Add logic for game modes (2-player and vs. AI)
-
+        // Add a back button click listener
+        Button backButton = view.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToMainMenuFragment();
+            }
+        });
         return view;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the game state to the bundle
+        outState.putBoolean("player1Turn", player1Turn);
+        outState.putInt("roundCount", roundCount);
+        // Save other game-related data as needed
+    }
+
 
     private void onButtonClick(TicTacToeSquare button) {
         if (button.isFilled()) {
@@ -56,20 +88,11 @@ public class GameFragment extends Fragment {
 
         roundCount++;
 
-        if (checkForWin()) {
-            // Player X or O has won, handle the win
-            if (player1Turn) {
-                playerWins("Player X"); // Player X wins
-            } else {
-                playerWins("Player O"); // Player O wins
-            }
-        } else if (checkForLoss()) {
-            // Player X or O has lost, handle the loss
-            if (player1Turn) {
-                playerLoses("Player X"); // Player X loses
-            } else {
-                playerLoses("Player O"); // Player O loses
-            }
+        // Check for a win after each move
+        if (checkWinCondition()) {
+            // A player has won, handle the win
+            String winningPlayer = player1Turn ? "Player 1 (X)" : "Player 2 (O)";
+            playerWins(winningPlayer);
         } else if (roundCount == 9) {
             // It's a draw
             declareDraw();
@@ -79,141 +102,44 @@ public class GameFragment extends Fragment {
         }
     }
 
-    private boolean checkForWin() {
+
+    private boolean checkWinCondition() {
         // Check rows, columns, and diagonals for a win
 
-        // Check rows
         for (int i = 0; i < 3; i++) {
-            if (buttons[i][0].isXSymbol() && buttons[i][1].isXSymbol() && buttons[i][2].isXSymbol()) {
-                // Player 1 (X) wins
-                playerWins("Player 1");
+            // Check rows
+            if (buttons[i][0].isFilled() && buttons[i][0].getSymbol() == buttons[i][1].getSymbol() && buttons[i][0].getSymbol() == buttons[i][2].getSymbol()) {
                 return true;
             }
-            if (buttons[i][0].isOSymbol() && buttons[i][1].isOSymbol() && buttons[i][2].isOSymbol()) {
-                // Player 2 (O) wins
-                playerWins("Player 2");
-                return true;
-            }
-        }
-
-        // Check columns
-        for (int i = 0; i < 3; i++) {
-            if (buttons[0][i].isXSymbol() && buttons[1][i].isXSymbol() && buttons[2][i].isXSymbol()) {
-                // Player 1 (X) wins
-                playerWins("Player 1");
-                return true;
-            }
-            if (buttons[0][i].isOSymbol() && buttons[1][i].isOSymbol() && buttons[2][i].isOSymbol()) {
-                // Player 2 (O) wins
-                playerWins("Player 2");
+            // Check columns
+            if (buttons[0][i].isFilled() && buttons[0][i].getSymbol() == buttons[1][i].getSymbol() && buttons[0][i].getSymbol() == buttons[2][i].getSymbol()) {
                 return true;
             }
         }
 
         // Check diagonals
-        if (buttons[0][0].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][2].isXSymbol()) {
-            // Player 1 (X) wins
-            playerWins("Player 1");
+        if (buttons[0][0].isFilled() && buttons[0][0].getSymbol() == buttons[1][1].getSymbol() && buttons[0][0].getSymbol() == buttons[2][2].getSymbol()) {
             return true;
         }
-        if (buttons[0][2].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][0].isXSymbol()) {
-            // Player 1 (X) wins
-            playerWins("Player 1");
-            return true;
-        }
-        if (buttons[0][0].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][2].isOSymbol()) {
-            // Player 2 (O) wins
-            playerWins("Player 2");
-            return true;
-        }
-        if (buttons[0][2].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][0].isOSymbol()) {
-            // Player 2 (O) wins
-            playerWins("Player 2");
-            return true;
-        }
-
-        // Check for a draw
-        if (roundCount == 9) {
-            declareDraw();
+        if (buttons[0][2].isFilled() && buttons[0][2].getSymbol() == buttons[1][1].getSymbol() && buttons[0][2].getSymbol() == buttons[2][0].getSymbol()) {
             return true;
         }
 
         return false; // No winner yet
     }
 
-    private boolean checkForLoss() {
-        // Check rows
-        for (int i = 0; i < 3; i++) {
-            if (buttons[i][0].isXSymbol() && buttons[i][1].isXSymbol() && buttons[i][2].isXSymbol()) {
-                // Player 1 (X) loses
-                playerLoses("Player 1");
-                return true;
-            }
-            if (buttons[i][0].isOSymbol() && buttons[i][1].isOSymbol() && buttons[i][2].isOSymbol()) {
-                // Player 2 (O) loses
-                playerLoses("Player 2");
-                return true;
-            }
-        }
-
-        // Check columns
-        for (int i = 0; i < 3; i++) {
-            if (buttons[0][i].isXSymbol() && buttons[1][i].isXSymbol() && buttons[2][i].isXSymbol()) {
-                // Player 1 (X) loses
-                playerLoses("Player 1");
-                return true;
-            }
-            if (buttons[0][i].isOSymbol() && buttons[1][i].isOSymbol() && buttons[2][i].isOSymbol()) {
-                // Player 2 (O) loses
-                playerLoses("Player 2");
-                return true;
-            }
-        }
-
-        // Check diagonals
-        if (buttons[0][0].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][2].isXSymbol()) {
-            // Player 1 (X) loses
-            playerLoses("Player 1");
-            return true;
-        }
-        if (buttons[0][2].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][0].isXSymbol()) {
-            // Player 1 (X) loses
-            playerLoses("Player 1");
-            return true;
-        }
-        if (buttons[0][0].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][2].isOSymbol()) {
-            // Player 2 (O) loses
-            playerLoses("Player 2");
-            return true;
-        }
-        if (buttons[0][2].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][0].isOSymbol()) {
-            // Player 2 (O) loses
-            playerLoses("Player 2");
-            return true;
-        }
-
-        return false; // No loss yet
-    }
-
-
-    private void playerWins(String player) {
-        String winMessage = player + " Wins!";
-        CustomDialogFragment winDialog = CustomDialogFragment.newInstance("WON", winMessage);
-        winDialog.show(getFragmentManager(), "win_dialog");
-        resetGame();
-    }
-
-    private void playerLoses(String player) {
-        String loseMessage = player + " Loses!";
-        CustomDialogFragment loseDialog = CustomDialogFragment.newInstance("LOST", loseMessage);
-        loseDialog.show(getFragmentManager(), "lose_dialog");
-        resetGame();
-    }
 
     private void declareDraw() {
         String drawMessage = "It's a Draw!";
         CustomDialogFragment drawDialog = CustomDialogFragment.newInstance("DRAW", drawMessage);
         drawDialog.show(getFragmentManager(), "draw_dialog");
+        resetGame();
+    }
+
+    private void playerWins(String player) {
+        String winMessage = player + " Wins!";
+        CustomDialogFragment winDialog = CustomDialogFragment.newInstance("WON", winMessage);
+        winDialog.show(getFragmentManager(), "win_dialog");
         resetGame();
     }
 
@@ -229,4 +155,45 @@ public class GameFragment extends Fragment {
             }
         }
     }
+
+    private void navigateToMainMenuFragment() {
+        MainMenuFragment mainMenuFragment = new MainMenuFragment();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, mainMenuFragment);
+        transaction.addToBackStack(null); // Optional: Add the transaction to the back stack
+        transaction.commit();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Check if the orientation has changed
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Handle landscape orientation
+            // For example, update UI elements or perform actions specific to landscape mode
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // Handle portrait orientation
+            // For example, update UI elements or perform actions specific to portrait mode
+        }
+
+        // Retain the current fragment without navigating back to the main menu
+        // You can use FragmentTransaction to reattach the current fragment
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.attach(this);
+        transaction.commit();
+
+        // Adjust text size and button size based on the orientation
+        Button backButton = requireView().findViewById(R.id.backButton);
+        float textSizeInSp = (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) ? 8 : 20; // Adjust text size as needed
+        backButton.setTextSize(textSizeInSp);
+
+        // Update button's layout parameters to maintain its size
+        ViewGroup.LayoutParams params = backButton.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        backButton.setLayoutParams(params);
+    }
+
+
 }
