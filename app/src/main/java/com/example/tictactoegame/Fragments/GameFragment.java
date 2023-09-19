@@ -79,6 +79,8 @@ public class GameFragment extends Fragment {
                 showDrawMessage();
             } else {
                 xTurn = !xTurn; // Switch to the other player's turn
+                Log.d("MainActivity", "Going to switch");
+
             }
         }
     }
