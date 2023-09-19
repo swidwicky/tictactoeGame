@@ -1,144 +1,166 @@
 package com.example.tictactoegame.Fragments;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.Toast;
+import androidx.fragment.app.Fragment;
+
 import com.example.tictactoegame.R;
-import com.google.android.material.button.MaterialButton;
+import com.example.tictactoegame.TicTacToeSquare;
 
 public class GameFragment extends Fragment {
 
-    private GridLayout ticTacToeBoard;
-    private MaterialButton[][] squares;
-    private boolean xTurn = true; // True for X, False for O
-    private boolean gameActive = true; // Indicates if the game is still active
+    private TicTacToeSquare[][] buttons = new TicTacToeSquare[3][3];
+    private boolean player1Turn = true; // Player 1 is X, Player 2 is O
+    private int roundCount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        // Initialize the game board
-        ticTacToeBoard = view.findViewById(R.id.ticTacToeBoard);
-        initializeBoard();
+        // Initialize buttons and add click listeners
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String buttonID = "square_" + i + j;
+                int resID = getResources().getIdentifier(buttonID, "id", getActivity().getPackageName());
+                buttons[i][j] = view.findViewById(resID);
+                buttons[i][j].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onButtonClick((TicTacToeSquare) v);
+                    }
+                });
+            }
+        }
+
+        // Add logic for game modes (2-player and vs. AI)
 
         return view;
     }
 
-    // Initialize the game board and set up click listeners for each square
-    private void initializeBoard() {
-        squares = new MaterialButton[3][3];
-        Log.d("MainActivity", "This is a debug message");
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                int resourceId = getResources().getIdentifier("square_" + row + col, "id", getActivity().getPackageName());
-                squares[row][col] = ticTacToeBoard.findViewById(resourceId);
-
-                // Create a click listener for the current square
-                squares[row][col].setOnClickListener(createSquareClickListener(row, col));
-            }
-        }
-    }
-
-    // Create a click listener for a square at the given row and column
-    private View.OnClickListener createSquareClickListener(final int row, final int col) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSquareClick(squares[row][col]);
-            }
-        };
-    }
-
-    // Handle square click event
-    private void onSquareClick(MaterialButton square) {
-        if (!gameActive) {
-            return; // Game is over, do nothing
+    private void onButtonClick(TicTacToeSquare button) {
+        if (button.isFilled()) {
+            // Cell is already filled, do nothing
+            return;
         }
 
-        // Check if the square is empty
-        if (square.getText() == null || square.getText().toString().isEmpty()) {
-            // Set X or O based on the current turn
-            if (xTurn) {
-                square.setText("X");
+        if (player1Turn) {
+            // Player 1's turn (X)
+            button.setXSymbol();
+        } else {
+            // Player 2's turn (O)
+            button.setOSymbol();
+        }
+
+        roundCount++;
+
+        if (checkForWin()) {
+            // Player X or O has won, handle the win
+            if (player1Turn) {
+                playerWins("Player X"); // Player X wins
             } else {
-                square.setText("O");
+                playerWins("Player O"); // Player O wins
             }
-
-            // Check for a win or draw
-            if (checkWin()) {
-                gameActive = false;
-                showWinMessage(xTurn ? "X" : "O");
-            } else if (checkDraw()) {
-                gameActive = false;
-                showDrawMessage();
-            } else {
-                xTurn = !xTurn; // Switch to the other player's turn
-                Log.d("MainActivity", "Going to switch");
-
-            }
+        } else if (roundCount == 9) {
+            // It's a draw
+            declareDraw();
+        } else {
+            // Switch turns
+            player1Turn = !player1Turn;
         }
     }
 
-    // Check for a win
-    private boolean checkWin() {
+
+    private boolean checkForWin() {
         // Check rows, columns, and diagonals for a win
 
         // Check rows
-        for (int row = 0; row < 3; row++) {
-            if (checkThree(squares[row][0], squares[row][1], squares[row][2])) {
+        for (int i = 0; i < 3; i++) {
+            if (buttons[i][0].isXSymbol() && buttons[i][1].isXSymbol() && buttons[i][2].isXSymbol()) {
+                // Player 1 (X) wins
+                playerWins("Player 1");
+                return true;
+            }
+            if (buttons[i][0].isOSymbol() && buttons[i][1].isOSymbol() && buttons[i][2].isOSymbol()) {
+                // Player 2 (O) wins
+                playerWins("Player 2");
                 return true;
             }
         }
 
         // Check columns
-        for (int col = 0; col < 3; col++) {
-            if (checkThree(squares[0][col], squares[1][col], squares[2][col])) {
+        for (int i = 0; i < 3; i++) {
+            if (buttons[0][i].isXSymbol() && buttons[1][i].isXSymbol() && buttons[2][i].isXSymbol()) {
+                // Player 1 (X) wins
+                playerWins("Player 1");
+                return true;
+            }
+            if (buttons[0][i].isOSymbol() && buttons[1][i].isOSymbol() && buttons[2][i].isOSymbol()) {
+                // Player 2 (O) wins
+                playerWins("Player 2");
                 return true;
             }
         }
 
         // Check diagonals
-        if (checkThree(squares[0][0], squares[1][1], squares[2][2]) ||
-                checkThree(squares[0][2], squares[1][1], squares[2][0])) {
+        if (buttons[0][0].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][2].isXSymbol()) {
+            // Player 1 (X) wins
+            playerWins("Player 1");
+            return true;
+        }
+        if (buttons[0][2].isXSymbol() && buttons[1][1].isXSymbol() && buttons[2][0].isXSymbol()) {
+            // Player 1 (X) wins
+            playerWins("Player 1");
+            return true;
+        }
+        if (buttons[0][0].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][2].isOSymbol()) {
+            // Player 2 (O) wins
+            playerWins("Player 2");
+            return true;
+        }
+        if (buttons[0][2].isOSymbol() && buttons[1][1].isOSymbol() && buttons[2][0].isOSymbol()) {
+            // Player 2 (O) wins
+            playerWins("Player 2");
             return true;
         }
 
-        return false;
+        // Check for a draw
+        if (roundCount == 9) {
+            declareDraw();
+            return true;
+        }
+
+        return false; // No winner yet
     }
 
-    // Helper method to check if three MaterialButton elements have the same text
-    private boolean checkThree(MaterialButton square1, MaterialButton square2, MaterialButton square3) {
-        return square1.getText() != null &&
-                square1.getText().toString().equals(square2.getText().toString()) &&
-                square1.getText().toString().equals(square3.getText().toString());
+
+    // Inside your GameFragment.java
+    private void playerWins(String player) {
+        // Create and show the win message dialog
+        WinDialogFragment winDialogFragment = new WinDialogFragment();
+        winDialogFragment.show(getFragmentManager(), "WinDialog");
+        resetGame();
     }
 
-    // Check for a draw
-    private boolean checkDraw() {
-        // Check if all squares are filled (no empty squares)
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                if (squares[row][col].getText() == null || squares[row][col].getText().toString().isEmpty()) {
-                    return false; // At least one square is empty
-                }
+
+    private void declareDraw() {
+        // Implement logic for a draw
+        Toast.makeText(getActivity(), "It's a draw!", Toast.LENGTH_SHORT).show();
+        resetGame();
+    }
+
+    private void resetGame() {
+        // Implement logic to reset the game
+        player1Turn = true;
+        roundCount = 0;
+
+        // Clear symbols on all buttons
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                buttons[i][j].clearCell();
             }
         }
-        return true; // All squares are filled, indicating a draw
-    }
-
-    // Display a win message
-    private void showWinMessage(String winner) {
-        Toast.makeText(getActivity(), "Player " + winner + " wins!", Toast.LENGTH_SHORT).show();
-    }
-
-    // Display a draw message
-    private void showDrawMessage() {
-        Toast.makeText(getActivity(), "It's a draw!", Toast.LENGTH_SHORT).show();
     }
 }

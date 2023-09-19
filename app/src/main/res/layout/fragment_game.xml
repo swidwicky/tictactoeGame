@@ -6,165 +6,138 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.GameFragment">
 
-    <GridLayout
-        android:id="@+id/ticTacToeBoard"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:rowCount="3"
-        android:columnCount="3">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <!-- Cell 00 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_00"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/square_01" />
+        <GridLayout
+            android:id="@+id/ticTacToeBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rowCount="3"
+            android:columnCount="3"
+            android:background="@color/Transparent">
 
-        <!-- Cell 01 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_01"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_11"
-            app:layout_constraintStart_toEndOf="@id/square_00"
-            app:layout_constraintEnd_toStartOf="@id/square_02" />
 
-        <!-- Cell 02 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_02"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_12"
-            app:layout_constraintStart_toEndOf="@id/square_01"
-            app:layout_constraintEnd_toStartOf="@id/square_10" />
+            <!-- Cell 00 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_00"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-        <!-- Cell 10 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_10"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_20"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/square_11" />
+            <!-- Cell 01 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_01"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-        <!-- Cell 11 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_11"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_21"
-            app:layout_constraintStart_toEndOf="@id/square_10"
-            app:layout_constraintEnd_toStartOf="@id/square_12" />
+            <!-- Cell 02 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_02"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-        <!-- Cell 12 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_12"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_22"
-            app:layout_constraintStart_toEndOf="@id/square_11"
-            app:layout_constraintEnd_toStartOf="@id/square_02" />
+            <!-- Cell 10 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_10"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-        <!-- Cell 20 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_20"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_22"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/square_21" />
+            <!-- Cell 11 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_11"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-        <!-- Cell 21 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_21"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_21"
-            app:layout_constraintStart_toEndOf="@id/square_20"
-            app:layout_constraintEnd_toStartOf="@id/square_22" />
+            <!-- Cell 12 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_12"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-        <!-- Cell 22 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/square_22"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            app:backgroundTint="@color/Black"
-            android:contentDescription="Tic Tac Toe Square"
-            android:text=""
-            android:textSize="48sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/square_22"
-            app:layout_constraintStart_toEndOf="@id/square_21"
-            app:layout_constraintEnd_toStartOf="@id/square_12" />
+            <!-- Cell 20 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_20"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
 
-    </GridLayout>
+            <!-- Cell 21 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_21"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
+
+            <!-- Cell 22 -->
+            <com.example.tictactoegame.TicTacToeSquare
+                android:id="@+id/square_22"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_row="2"
+                android:layout_column="2"
+                android:contentDescription="Tic Tac Toe Square"
+                android:background="@drawable/grid_divider"/>
+
+        </GridLayout>
+    </LinearLayout>
 </FrameLayout>
