@@ -71,7 +71,6 @@ public class GameFragment extends Fragment {
         // Save other game-related data as needed
     }
 
-
     private void onButtonClick(TicTacToeSquare button) {
         if (button.isFilled()) {
             // Cell is already filled, do nothing
@@ -102,7 +101,6 @@ public class GameFragment extends Fragment {
         }
     }
 
-
     private boolean checkWinCondition() {
         // Check rows, columns, and diagonals for a win
 
@@ -127,7 +125,6 @@ public class GameFragment extends Fragment {
 
         return false; // No winner yet
     }
-
 
     private void declareDraw() {
         String drawMessage = "It's a Draw!";
