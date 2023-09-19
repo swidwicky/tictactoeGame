@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tictactoegame.R;
 
-public class AvatarAdapter extends RecyclerView.Adapter<avatarAdapter.ViewHolder> {
+public class avatarAdapter extends RecyclerView.Adapter<avatarAdapter.ViewHolder> {
 
     private int[] avatarImages = {
             R.drawable.av1,
@@ -26,7 +26,7 @@ public class AvatarAdapter extends RecyclerView.Adapter<avatarAdapter.ViewHolder
 
     private LayoutInflater inflater;
 
-    public AvatarAdapter(Context context) {
+    public avatarAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
     }
 
