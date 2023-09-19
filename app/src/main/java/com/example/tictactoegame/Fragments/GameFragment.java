@@ -147,6 +147,7 @@ public class GameFragment extends Fragment {
         // Implement logic to reset the game
         player1Turn = true;
         roundCount = 0;
+        //HELLO
 
         // Clear symbols on all buttons
         for (int i = 0; i < 3; i++) {
