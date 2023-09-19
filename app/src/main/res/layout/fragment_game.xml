@@ -19,6 +19,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/modeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+
+
         <!-- Centered GridLayout for Tic Tac Toe cells -->
         <GridLayout
             android:id="@+id/ticTacToeBoard"
@@ -154,7 +177,7 @@
 
         <!-- Toggle Game Mode button centered below the "Back" button -->
         <Button
-            android:id="@+id/toggleGameModeButton"
+            android:id="@+id/switchModeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Toggle Game Mode"
@@ -164,6 +187,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.5" />
+
+        <!-- Reset Board button centered below the "Toggle Game Mode" button -->
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Board"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/switchModeButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <!-- Button to adjust the timer -->
+        <Button
+            android:id="@+id/adjustTimerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adjust Timer"/>
 
     </LinearLayout>
 
