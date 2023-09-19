@@ -16,8 +16,8 @@
         <!-- Cell 00 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_00"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -33,8 +33,8 @@
         <!-- Cell 01 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_01"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -50,8 +50,8 @@
         <!-- Cell 02 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_02"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -67,8 +67,8 @@
         <!-- Cell 10 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_10"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -84,8 +84,8 @@
         <!-- Cell 11 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_11"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -101,8 +101,8 @@
         <!-- Cell 12 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_12"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -118,8 +118,8 @@
         <!-- Cell 20 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_20"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -135,8 +135,8 @@
         <!-- Cell 21 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_21"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
@@ -152,8 +152,8 @@
         <!-- Cell 22 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/square_22"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
