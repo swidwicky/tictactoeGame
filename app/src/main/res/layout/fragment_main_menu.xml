@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainMenuFragment"
@@ -7,46 +8,53 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.MainMenuFragment">
 
+    <!-- TextView at the top -->
     <TextView
         android:id="@+id/WelcomeTextView"
-        android:layout_width="185dp"
-        android:layout_height="58dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Welcome To Tic Tac Toe Game"
         android:textColor="@color/cardview_dark_background"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textAlignment="center"
         android:fontFamily="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
 
+    <!-- Guideline for button gap (adjust ratio for desired gap) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="366dp" />
+
+    <!-- Buttons with different gaps based on orientation -->
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
         android:text="Start Game"
         android:fontFamily="serif"
-        app:layout_constraintBottom_toTopOf="@+id/GamePlayTrackerButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@+id/WelcomeTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/GamePlayTrackerButton"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/GamePlayTrackerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
         android:text="Gameplay Tracker"
         android:fontFamily="serif"
-        app:layout_constraintBottom_toTopOf="@+id/UserProfileButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startGameButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/UserProfileButton"
+        android:layout_marginTop="10dp"/> <!-- Adjust margin for the desired gap -->
 
     <Button
         android:id="@+id/UserProfileButton"
@@ -54,11 +62,10 @@
         android:layout_height="wrap_content"
         android:text="Create User Profile"
         android:fontFamily="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintTop_toBottomOf="@+id/GamePlayTrackerButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
