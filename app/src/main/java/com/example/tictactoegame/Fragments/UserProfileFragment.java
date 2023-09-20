@@ -3,6 +3,7 @@ package com.example.tictactoegame.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tictactoegame.Activities.UserProfile;
 import com.example.tictactoegame.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserProfileFragment extends Fragment {
 
@@ -27,6 +32,8 @@ public class UserProfileFragment extends Fragment {
     private Button saveButton;
     private Button backButton;
     private TextView profileDataTextView;
+    private List<UserProfile> profileList = new ArrayList<>();
+
     private int selectedAvatarResourceId = -1; // Added to store selected avatar resource ID
 
     @Nullable
@@ -66,12 +73,14 @@ public class UserProfileFragment extends Fragment {
                 } else {
                     // Save the user profile data to SharedPreferences
                     saveUserProfileData(username, selectedAvatarResourceId);
+                    UserProfile userProfile = new UserProfile(username, selectedAvatarResourceId);
+                    profileList.add(userProfile);
                     // Display the saved data in profileDataTextView
                     displayUserProfileData();
                     // Hide the save button
                     saveButton.setVisibility(View.GONE);
                     // Navigate back to the main menu fragment
-                    navigateToMainMenuFragment();
+                    navigateToProfileListFragment(profileList);
 
 
                 }
@@ -122,4 +131,19 @@ public class UserProfileFragment extends Fragment {
         transaction.replace(R.id.fragment_container, mainMenuFragment);
         transaction.commit();
     }
-}
+
+    // Method to navigate to ProfileListFragment with the profileList
+    private void navigateToProfileListFragment(List<UserProfile> profileList) {
+            ProfileListFragment profileListFragment = new ProfileListFragment();
+
+            // Pass the profileList as an argument to ProfileListFragment
+            Bundle args = new Bundle();
+            args.putParcelableArrayList("profileList", new ArrayList<>(profileList));
+            profileListFragment.setArguments(args);
+
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, profileListFragment);
+            transaction.commit();
+        }
+    }
+

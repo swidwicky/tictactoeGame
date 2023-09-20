@@ -27,7 +27,9 @@
         <!-- Define other activities as needed -->
         <activity
             android:name=".Activities.UserProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"> <!-- Use adjustResize -->
+        </activity>
 
         <activity
             android:name=".Activities.SettingsActivity"
