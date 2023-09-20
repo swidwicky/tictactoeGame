@@ -1,4 +1,4 @@
-<!-- fragment_create_user_profile.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,21 +17,86 @@
         android:fontFamily="sans-serif"
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
-        app:layout_constraintBottom_toTopOf="@+id/avatarSelectionRecyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/avatarContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/avatarSelectionRecyclerView"
-        android:layout_width="352dp"
-        android:layout_height="480dp"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+    <!-- Avatar Container (GridLayout) -->
+    <GridLayout
+        android:id="@+id/avatarContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:rowCount="2"
+        android:columnCount="2"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameEditText"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp"/>
+
+    <!-- Avatars (ImageViews) -->
+    <!-- Avatars (ImageViews) -->
+    <ImageView
+        android:id="@+id/avatar1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="fill"
+        android:scaleType="fitCenter"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:srcCompat="@drawable/av1"
+        app:layout_constraintTop_toTopOf="@id/avatarContainer"
+        app:layout_constraintStart_toStartOf="@id/avatarContainer"
+        app:layout_constraintEnd_toStartOf="@id/avatar2"
+        app:layout_constraintBottom_toTopOf="@id/avatar3"/>
+
+    <ImageView
+        android:id="@+id/avatar2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="fill"
+        android:scaleType="fitCenter"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:srcCompat="@drawable/av2"
+        app:layout_constraintTop_toTopOf="@id/avatarContainer"
+        app:layout_constraintStart_toEndOf="@id/avatar1"
+        app:layout_constraintEnd_toEndOf="@id/avatarContainer"
+        app:layout_constraintBottom_toTopOf="@id/avatar4"/>
+
+    <ImageView
+        android:id="@+id/avatar3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="fill"
+        android:scaleType="fitCenter"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:srcCompat="@drawable/av3"
+        app:layout_constraintTop_toBottomOf="@id/avatar1"
+        app:layout_constraintStart_toStartOf="@id/avatarContainer"
+        app:layout_constraintEnd_toStartOf="@id/avatar4"
+        app:layout_constraintBottom_toBottomOf="@id/avatarContainer"/>
+
+    <ImageView
+        android:id="@+id/avatar4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="fill"
+        android:scaleType="fitCenter"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:srcCompat="@drawable/av4"
+        app:layout_constraintTop_toBottomOf="@id/avatar2"
+        app:layout_constraintStart_toEndOf="@id/avatar3"
+        app:layout_constraintEnd_toEndOf="@id/avatarContainer"
+        app:layout_constraintBottom_toBottomOf="@id/avatarContainer"/>
+
 
     <Button
         android:id="@+id/saveButton"
@@ -39,12 +104,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarContainer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/backButton"
@@ -52,12 +116,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarContainer"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/profileDataTextView"
@@ -68,6 +131,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,5 +3,17 @@
     <color name="Black">#000000</color>
     <color name="Transparent">#00000000</color>
     <color name="selected_avatar_bg">#FF4081</color>
+    <color name="LightGray">#D3D3D3</color>
+    <color name="LightBlue">#ADD8E6</color>
+    <color name="LightGreen">#90EE90</color>
+    <color name="LightPink">#FFB6C1</color>
+    <color name="LightYellow">#FFFFE0</color>
+    <color name="LightPurple">#E6E6FA</color>
+    <color name="LightOrange">#FFD700</color>
+    <color name="LightRed">#FF6961</color>
+    <color name="LightBrown">#D2B48C</color>
+    <color name="LightLavender">#E6E6FA</color>
+    <color name="LightCyan">#E0FFFF</color>
+
 
 </resources>

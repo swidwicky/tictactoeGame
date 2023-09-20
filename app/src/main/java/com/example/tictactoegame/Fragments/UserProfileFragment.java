@@ -3,24 +3,23 @@ package com.example.tictactoegame.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tictactoegame.Activities.UserProfile;
 import com.example.tictactoegame.R;
+import com.example.tictactoegame.Activities.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +27,13 @@ import java.util.List;
 public class UserProfileFragment extends Fragment {
 
     private EditText userNameEditText;
-    private RecyclerView avatarSelectionRecyclerView;
+    private ImageView avatar1, avatar2, avatar3, avatar4;
     private Button saveButton;
     private Button backButton;
     private TextView profileDataTextView;
     private List<UserProfile> profileList = new ArrayList<>();
 
-    private int selectedAvatarResourceId = -1; // Added to store selected avatar resource ID
+    private int selectedAvatarResourceId = -1;
 
     @Nullable
     @Override
@@ -42,66 +41,67 @@ public class UserProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         userNameEditText = view.findViewById(R.id.userNameEditText);
-        avatarSelectionRecyclerView = view.findViewById(R.id.avatarSelectionRecyclerView);
+        avatar1 = view.findViewById(R.id.avatar1);
+        avatar2 = view.findViewById(R.id.avatar2);
+        avatar3 = view.findViewById(R.id.avatar3);
+        avatar4 = view.findViewById(R.id.avatar4);
         saveButton = view.findViewById(R.id.saveButton);
         backButton = view.findViewById(R.id.backButton);
         profileDataTextView = view.findViewById(R.id.profileDataTextView);
 
-        // Set up RecyclerView
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        avatarSelectionRecyclerView.setLayoutManager(layoutManager);
-
-        // Create and set the adapter for the RecyclerView
-        AvatarAdapter avatarAdapter = new AvatarAdapter(requireContext());
-        avatarSelectionRecyclerView.setAdapter(avatarAdapter);
+        // Handle avatar selection from ImageView
+        avatar1.setOnClickListener(v -> selectAvatar(R.drawable.av1));
+        avatar2.setOnClickListener(v -> selectAvatar(R.drawable.av2));
+        avatar3.setOnClickListener(v -> selectAvatar(R.drawable.av3));
+        avatar4.setOnClickListener(v -> selectAvatar(R.drawable.av4));
 
         // Handle Save button click
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get the user input (username)
-                String username = userNameEditText.getText().toString();
-                selectedAvatarResourceId = avatarAdapter.getSelectedAvatarResourceId();
+        saveButton.setOnClickListener(v -> {
+            String username = userNameEditText.getText().toString();
 
-                if (username.isEmpty()) {
-                    // Show an error message or toast to inform the user
-                    Toast.makeText(getContext(), "Please enter a valid username", Toast.LENGTH_SHORT).show();
-                } else if (selectedAvatarResourceId == -1) {
-                    // Show an error message or toast to inform the user that they need to select an avatar
-                    Toast.makeText(getContext(), "Please select an avatar", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Save the user profile data to SharedPreferences
-                    saveUserProfileData(username, selectedAvatarResourceId);
-                    UserProfile userProfile = new UserProfile(username, selectedAvatarResourceId);
-                    profileList.add(userProfile);
-                    // Display the saved data in profileDataTextView
-                    displayUserProfileData();
-                    // Hide the save button
-                    saveButton.setVisibility(View.GONE);
-                    // Navigate back to the main menu fragment
-                    navigateToProfileListFragment(profileList);
-
-
-                }
+            if (username.isEmpty()) {
+                Toast.makeText(getContext(), "Please enter a valid username", Toast.LENGTH_SHORT).show();
+            } else if (selectedAvatarResourceId == -1) {
+                Toast.makeText(getContext(), "Please select an avatar", Toast.LENGTH_SHORT).show();
+            } else {
+                saveUserProfileData(username, selectedAvatarResourceId);
+                UserProfile userProfile = new UserProfile(username, selectedAvatarResourceId);
+                profileList.add(userProfile);
+                displayUserProfileData();
+                saveButton.setVisibility(View.GONE);
+                navigateToProfileListFragment(profileList);
             }
         });
 
         // Handle Back button click
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Check if there is a previous fragment in the back stack
-                if (getParentFragmentManager() != null && getParentFragmentManager().getBackStackEntryCount() > 0) {
-                    getParentFragmentManager().popBackStack(); // Pop the back stack to go back to the previous fragment
-                } else {
-                    // If there's no previous fragment, you can handle it as per your app's logic
-                    // For example, you might want to navigate to a different screen or exit the app.
-                }
-            }
+        backButton.setOnClickListener(v -> {
+            navigateBack(); // Custom method to handle fragment navigation
         });
 
         return view;
+    }
+
+    // Method to select an avatar and update the UI
+    // Method to select an avatar and update the UI
+    private void selectAvatar(int resourceId) {
+        selectedAvatarResourceId = resourceId;
+
+        // Clear any previous selections
+        avatar1.setSelected(false);
+        avatar2.setSelected(false);
+        avatar3.setSelected(false);
+        avatar4.setSelected(false);
+
+        // Highlight the selected avatar
+        if (resourceId == R.drawable.av1) {
+            avatar1.setSelected(true);
+        } else if (resourceId == R.drawable.av2) {
+            avatar2.setSelected(true);
+        } else if (resourceId == R.drawable.av3) {
+            avatar3.setSelected(true);
+        } else if (resourceId == R.drawable.av4) {
+            avatar4.setSelected(true);
+        }
     }
 
     // Method to save user profile data to SharedPreferences
@@ -124,26 +124,27 @@ public class UserProfileFragment extends Fragment {
         profileDataTextView.setText(userProfileText);
     }
 
-    // Method to navigate back to the main menu fragment
-    private void navigateToMainMenuFragment() {
+    // Custom method to navigate back
+    private void navigateBack() {
+        // Replace the current fragment with the main menu fragment
         MainMenuFragment mainMenuFragment = new MainMenuFragment();
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, mainMenuFragment);
         transaction.commit();
     }
 
     // Method to navigate to ProfileListFragment with the profileList
     private void navigateToProfileListFragment(List<UserProfile> profileList) {
-            ProfileListFragment profileListFragment = new ProfileListFragment();
+        ProfileListFragment profileListFragment = new ProfileListFragment();
 
-            // Pass the profileList as an argument to ProfileListFragment
-            Bundle args = new Bundle();
-            args.putParcelableArrayList("profileList", new ArrayList<>(profileList));
-            profileListFragment.setArguments(args);
+        // Pass the profileList as an argument to ProfileListFragment
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("profileList", new ArrayList<>(profileList));
+        profileListFragment.setArguments(args);
 
-            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, profileListFragment);
-            transaction.commit();
-        }
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, profileListFragment);
+        transaction.addToBackStack(null); // Add to back stack for proper navigation
+        transaction.commit();
     }
-
+}
