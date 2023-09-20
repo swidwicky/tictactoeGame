@@ -2,6 +2,7 @@ package com.example.tictactoegame.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,29 +82,36 @@ public class UserProfileFragment extends Fragment {
         return view;
     }
 
-    // Method to select an avatar and update the UI
-    // Method to select an avatar and update the UI
     private void selectAvatar(int resourceId) {
         selectedAvatarResourceId = resourceId;
 
-        // Clear any previous selections
+        // Clear any previous selections and reset background colors
         avatar1.setSelected(false);
         avatar2.setSelected(false);
         avatar3.setSelected(false);
         avatar4.setSelected(false);
 
-        // Highlight the selected avatar
+        // Reset background colors to the default
+        avatar1.setBackgroundColor(Color.TRANSPARENT);
+        avatar2.setBackgroundColor(Color.TRANSPARENT);
+        avatar3.setBackgroundColor(Color.TRANSPARENT);
+        avatar4.setBackgroundColor(Color.TRANSPARENT);
+
+        // Highlight the selected avatar and change its background color
         if (resourceId == R.drawable.av1) {
             avatar1.setSelected(true);
+            avatar1.setBackgroundColor(Color.GREEN); // You can change the color to your preference
         } else if (resourceId == R.drawable.av2) {
             avatar2.setSelected(true);
+            avatar2.setBackgroundColor(Color.GREEN);
         } else if (resourceId == R.drawable.av3) {
             avatar3.setSelected(true);
+            avatar3.setBackgroundColor(Color.GREEN);
         } else if (resourceId == R.drawable.av4) {
             avatar4.setSelected(true);
+            avatar4.setBackgroundColor(Color.GREEN);
         }
     }
-
     // Method to save user profile data to SharedPreferences
     private void saveUserProfileData(String username, int selectedAvatarResourceId) {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
@@ -147,4 +155,8 @@ public class UserProfileFragment extends Fragment {
         transaction.addToBackStack(null); // Add to back stack for proper navigation
         transaction.commit();
     }
+
+    // Method to select an avatar and update the UI
+
+
 }
