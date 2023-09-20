@@ -1,57 +1,103 @@
 package com.example.tictactoegame.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tictactoegame.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UserProfileFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private EditText userNameEditText;
+    private RecyclerView avatarSelectionRecyclerView;
+    private Button saveButton;
+    private Button backButton;
+    private int selectedAvatarResourceId = -1; // Added to store selected avatar resource ID
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public UserProfileFragment() {
-        // Required empty public constructor
-    }
-
-    public static UserProfileFragment newInstance(String param1, String param2) {
-        UserProfileFragment fragment = new UserProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
+
+        userNameEditText = view.findViewById(R.id.userNameEditText);
+        avatarSelectionRecyclerView = view.findViewById(R.id.avatarSelectionRecyclerView);
+        saveButton = view.findViewById(R.id.saveButton);
+        backButton = view.findViewById(R.id.backButton);
+
+        // Set up RecyclerView
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        avatarSelectionRecyclerView.setLayoutManager(layoutManager);
+
+        // Create and set the adapter for the RecyclerView
+        AvatarAdapter avatarAdapter = new AvatarAdapter(requireContext());
+        avatarSelectionRecyclerView.setAdapter(avatarAdapter);
+
+        // Handle Save button click
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the user input (username)
+                String username = userNameEditText.getText().toString();
+                int selectedAvatarResourceId = avatarAdapter.getSelectedAvatarResourceId();
+
+
+                if (username.isEmpty()) {
+                    // Show an error message or toast to inform the user
+                    Toast.makeText(getContext(), "Please enter a valid username", Toast.LENGTH_SHORT).show();
+                } else if (selectedAvatarResourceId == -1) {
+                    // Show an error message or toast to inform the user that they need to select an avatar
+                    Toast.makeText(getContext(), "Please select an avatar", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Save the user profile data to SharedPreferences
+                    saveUserProfileData(username, selectedAvatarResourceId);
+
+                    // Navigate to another fragment (replace FragmentToNavigateTo with your desired fragment)
+                    MainMenuFragment fragment = new MainMenuFragment();
+                    FragmentTransaction transaction = requireFragmentManager().beginTransaction();
+                    transaction.replace(R.id.UserProfileContainer, fragment);
+                    transaction.addToBackStack(null); // Optional: Add the transaction to the back stack
+                    transaction.commit();
+                }
+            }
+        });
+
+        // Handle Back button click
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check if there is a previous fragment in the back stack
+                if (getParentFragmentManager() != null && getParentFragmentManager().getBackStackEntryCount() > 0) {
+                    getParentFragmentManager().popBackStack(); // Pop the back stack to go back to the previous fragment
+                } else {
+                    // If there's no previous fragment, you can handle it as per your app's logic
+                    // For example, you might want to navigate to a different screen or exit the app.
+                }
+            }
+        });
+
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_profile, container, false);
+    // Method to save user profile data to SharedPreferences
+    private void saveUserProfileData(String username, int selectedAvatarResourceId) {
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username", username);
+        editor.putInt("avatarResourceId", selectedAvatarResourceId);
+        editor.apply();
     }
 }
