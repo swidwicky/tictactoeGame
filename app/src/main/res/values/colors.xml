@@ -1,6 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="your_background_color">#FF5722</color>
     <color name="Black">#000000</color>
-    <color name="selected_avatar_bg">FF4081</color>
     <color name="Transparent">#00000000</color>
+    <color name="selected_avatar_bg">#FF4081</color>
+
 </resources>
