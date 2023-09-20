@@ -37,6 +37,17 @@ public class GameFragment extends Fragment {
 
     private int secondsRemaining = 60; // Initial timer duration in seconds
 
+    // Add these member variables to track move counts
+    private int player1Moves = 0;
+    private int player2Moves = 0;
+    private int aiMoves = 0;
+
+    // Update the TextViews for move counts
+    private TextView movesPlayer1TextView;
+    private TextView movesPlayer2TextView;
+    private TextView movesAITextView;
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true); // Retain this fragment across configuration changes
@@ -46,6 +57,7 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         timerTextView = view.findViewById(R.id.timerTextView);
+
         // Initialize buttons and add click listeners
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -60,6 +72,7 @@ public class GameFragment extends Fragment {
                 });
             }
         }
+
 
         // Find the TextView for displaying the game mode
         TextView modeTextView = view.findViewById(R.id.modeTextView);
@@ -102,6 +115,12 @@ public class GameFragment extends Fragment {
         // Find the timerTextView for displaying the timer
         final TextView timerTextView = view.findViewById(R.id.timerTextView);
 
+
+        // TEXT VIEWS FOR PLAYER MOVES
+        movesPlayer1TextView = view.findViewById(R.id.movesPlayer1TextView);
+        movesPlayer2TextView = view.findViewById(R.id.movesPlayer2TextView);
+        movesAITextView = view.findViewById(R.id.movesAITextView);
+
         // Add a button to adjust the timer duration
         Button adjustTimerButton = view.findViewById(R.id.adjustTimerButton);
         adjustTimerButton.setOnClickListener(new View.OnClickListener() {
@@ -132,15 +151,22 @@ public class GameFragment extends Fragment {
         if (player1Turn) {
             // Player 1's turn (X)
             button.setXSymbol();
+            player1Moves++;
+            movesPlayer1TextView.setText("Player 1 Moves: " + player1Moves);
         } else {
             // Player 2's turn (O)
             button.setOSymbol();
+            player2Moves++;
+            movesPlayer2TextView.setText("Player 2 Moves: " + player2Moves);
         }
 
         roundCount++;
 
         // Reset the timer after a move
         startTimer();
+
+        // Update moves display
+//        updateMovesDisplay(roundCount, 9);
 
         // Check for a win after each move
         if (checkWinCondition()) {
@@ -157,8 +183,10 @@ public class GameFragment extends Fragment {
             // If in AI mode and it's AI's turn
             if (isAIMode && !player1Turn) {
                 aiPlayer.makeMove(buttons);
+                aiMoves++;
+                movesAITextView.setText("AI Moves: " + aiMoves);
                 roundCount++;
-                player1Turn = true; // Switch back to human player's turn
+                player1Turn = true; // Switch back to the human player's turn
 
                 // Check for a win after AI's move
                 if (checkWinCondition()) {
@@ -203,6 +231,7 @@ public class GameFragment extends Fragment {
         String drawMessage = "It's a Draw!";
         CustomDialogFragment drawDialog = CustomDialogFragment.newInstance("DRAW", drawMessage);
         drawDialog.show(getFragmentManager(), "draw_dialog");
+        resetMoveCounts();
         resetGame();
     }
 
@@ -210,7 +239,17 @@ public class GameFragment extends Fragment {
         String winMessage = player + " Wins!";
         CustomDialogFragment winDialog = CustomDialogFragment.newInstance("WON", winMessage);
         winDialog.show(getFragmentManager(), "win_dialog");
+        resetMoveCounts(); // Reset move counts
         resetGame();
+    }
+
+    private void resetMoveCounts() {
+        this.player1Moves = 0;
+        this.player2Moves = 0;
+        this.aiMoves = 0;
+        movesPlayer1TextView.setText("Player 1 Moves: " + player1Moves);
+        movesPlayer2TextView.setText("Player 2 Moves: " + player1Moves);
+        movesAITextView.setText("AI Moves: " + player1Moves);
     }
 
     // Modify the resetGame() method to reset the timer
@@ -226,13 +265,13 @@ public class GameFragment extends Fragment {
             }
         }
 
-        // Cancel the previous timer if it's running
+        // Cancel the previous timer
         if (timer != null) {
             timer.cancel();
         }
 
         // Set the initial timer duration here
-        secondsRemaining = this.secondsRemaining;
+        secondsRemaining = 60;
         updateTimerDisplay(timerTextView, secondsRemaining * 1000); // Update the displayed timer
 
         // Do not start the timer immediately, wait for a move
@@ -250,9 +289,9 @@ public class GameFragment extends Fragment {
                 declareDraw();
             }
         }
+
+        resetMoveCounts();
     }
-
-
 
     private void navigateToMainMenuFragment() {
         MainMenuFragment mainMenuFragment = new MainMenuFragment();
@@ -295,7 +334,7 @@ public class GameFragment extends Fragment {
                     // Handle the new time (e.g., update the timer duration)
                     if (newTimeInSeconds > 0) {
                         secondsRemaining = newTimeInSeconds;
-                        updateTimerDisplay(timerTextView,secondsRemaining * 1000); // Update the displayed timer
+                        updateTimerDisplay(timerTextView, secondsRemaining * 1000); // Update the displayed timer
                     } else {
                         // Handle invalid input (e.g., show an error message)
                         Toast.makeText(requireContext(), "Invalid input. Timer not updated.", Toast.LENGTH_SHORT).show();
@@ -338,6 +377,7 @@ public class GameFragment extends Fragment {
             }
         }.start();
     }
+
     private void updateTimerDisplay(TextView timerTextView, long timeLeftInMillis) {
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;

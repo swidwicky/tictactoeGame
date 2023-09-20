@@ -39,8 +39,55 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"/>
 
+        <TextView
+            android:id="@+id/movesMadeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/timerTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
+        <!-- TextView to display the total available moves -->
+        <TextView
+            android:id="@+id/totalMovesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/movesMadeTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
+        <!-- Moves Made by Player 1 TextView -->
+        <TextView
+            android:id="@+id/movesPlayer1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Moves Made by Player 2 TextView -->
+        <TextView
+            android:id="@+id/movesPlayer2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Moves Made by AI TextView -->
+        <TextView
+            android:id="@+id/movesAITextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"/>
 
         <!-- Centered GridLayout for Tic Tac Toe cells -->
         <GridLayout
@@ -159,7 +206,6 @@
                 android:background="@drawable/grid_divider"
                 android:layout_row="2"
                 android:layout_column="2" />
-
         </GridLayout>
 
         <!-- "Back" button centered at the top -->
@@ -208,7 +254,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Adjust Timer"/>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
