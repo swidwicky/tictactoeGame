@@ -6,6 +6,7 @@
     android:id="@+id/mainMenuFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_drawable"
     tools:context=".Fragments.MainMenuFragment">
 
     <!-- TextView at the top -->
@@ -14,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome To Tic Tac Toe Game"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFD700"
         android:textSize="20sp"
         android:textAlignment="center"
         android:fontFamily="serif"
@@ -23,22 +24,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 
-    <!-- Guideline for button gap (adjust ratio for desired gap) -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+    <View
+        android:id="@+id/left_vertical_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#FFD700"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Right vertical line -->
+    <View
+        android:id="@+id/right_vertical_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#FFD700"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- ImageView for the PNG -->
+    <ImageView
+        android:id="@+id/pngImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="366dp" />
+        android:src="@drawable/pt_01"
+        app:layout_constraintTop_toBottomOf="@id/WelcomeTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
-    <!-- Buttons with different gaps based on orientation -->
+    <!-- Rest of the layout components remain the same -->
+
+    <!-- Button: Start Game -->
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Game"
+        android:textColor="#000000"
+        android:background="#C0C0C0"
         android:fontFamily="serif"
-        app:layout_constraintTop_toBottomOf="@+id/WelcomeTextView"
+        app:layout_constraintTop_toBottomOf="@id/pngImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/GamePlayTrackerButton"
@@ -49,18 +75,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gameplay Tracker"
+        android:textColor="#000000"
+        android:background="#D3D3D3"
         android:fontFamily="serif"
         app:layout_constraintTop_toBottomOf="@+id/startGameButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/UserProfileButton"
-        android:layout_marginTop="10dp"/> <!-- Adjust margin for the desired gap -->
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/UserProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create User Profile"
+        android:textColor="#000000"
+        android:background="#C0C0C0"
         android:fontFamily="serif"
         app:layout_constraintTop_toBottomOf="@+id/GamePlayTrackerButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,4 +98,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"/>
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

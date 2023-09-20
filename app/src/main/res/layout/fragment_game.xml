@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_drawable"
     tools:context=".Fragments.GameFragment">
 
     <!-- Centered LinearLayout for game elements -->
@@ -214,6 +215,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
+            android:textColor="#000000"
+            android:background="#C0C0C0"
             app:layout_constraintTop_toBottomOf="@+id/ticTacToeBoard"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -227,6 +230,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Toggle Game Mode"
+            android:textColor="#000000"
+            android:background="#C0C0C0"
             app:layout_constraintTop_toBottomOf="@+id/backButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -240,6 +245,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reset Board"
+            android:textColor="#000000"
+            android:background="#C0C0C0"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/switchModeButton"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -253,6 +260,8 @@
             android:id="@+id/adjustTimerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adjust Timer"/>
+            android:text="Adjust Timer"
+            android:textColor="#000000"
+            android:background="#C0C0C0"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
