@@ -69,10 +69,12 @@ public class UserProfileFragment extends Fragment {
                 UserProfile userProfile = new UserProfile(username, selectedAvatarResourceId);
                 profileList.add(userProfile);
                 displayUserProfileData();
-                saveButton.setVisibility(View.GONE);
-                navigateToProfileListFragment(profileList);
+
+                // Navigate to the GameFragment
+                navigateToGameFragment();
             }
         });
+
 
         // Handle Back button click
         backButton.setOnClickListener(v -> {
@@ -142,19 +144,22 @@ public class UserProfileFragment extends Fragment {
     }
 
     // Method to navigate to ProfileListFragment with the profileList
-    private void navigateToProfileListFragment(List<UserProfile> profileList) {
-        ProfileListFragment profileListFragment = new ProfileListFragment();
-
-        // Pass the profileList as an argument to ProfileListFragment
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("profileList", new ArrayList<>(profileList));
-        profileListFragment.setArguments(args);
-
+    // Method to navigate to the GameFragment
+    private void navigateToGameFragment() {
+        // Replace the current fragment with the GameFragment
+        GameFragment gameFragment = new GameFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, profileListFragment);
-        transaction.addToBackStack(null); // Add to back stack for proper navigation
+
+        // Pass the username and selectedAvatarResourceId as arguments
+        Bundle args = new Bundle();
+        args.putString("username", userNameEditText.getText().toString());
+        args.putInt("selectedAvatarResourceId", selectedAvatarResourceId);
+        gameFragment.setArguments(args);
+
+        transaction.replace(R.id.fragment_container, gameFragment);
         transaction.commit();
     }
+
 
     // Method to select an avatar and update the UI
 

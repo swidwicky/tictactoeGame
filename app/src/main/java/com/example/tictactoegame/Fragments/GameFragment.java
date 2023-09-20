@@ -27,6 +27,7 @@ public class GameFragment extends Fragment {
     private TicTacToeSquare[][] buttons = new TicTacToeSquare[3][3];
     private boolean player1Turn = true; // Player 1 is X, Player 2 is O
     private int roundCount = 0;
+    private String username;
     private CustomDialogFragment winDialog;
     private AIPlayer aiPlayer;
     private boolean isAIMode = false; // Flag to indicate AI mode
@@ -57,6 +58,18 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         timerTextView = view.findViewById(R.id.timerTextView);
+
+        // Retrieve the username from the arguments
+        Bundle args = getArguments();
+        if (args != null) {
+            username = args.getString("username", "Player 1"); // Default to "Player 1" if not provided
+        } else {
+            username = "Player 1"; // Set a default username if not provided
+        }
+
+        // Find the TextView for displaying the player's name
+        TextView playerNameTextView = view.findViewById(R.id.movesPlayer1TextView);
+        playerNameTextView.setText(username);
 
         // Initialize buttons and add click listeners
         for (int i = 0; i < 3; i++) {
@@ -152,7 +165,7 @@ public class GameFragment extends Fragment {
             // Player 1's turn (X)
             button.setXSymbol();
             player1Moves++;
-            movesPlayer1TextView.setText("Player 1 Moves: " + player1Moves);
+            movesPlayer1TextView.setText(username + " Moves: " + player1Moves);
         } else {
             // Player 2's turn (O)
             button.setOSymbol();
