@@ -70,6 +70,10 @@ public class UserProfileFragment extends Fragment {
                     displayUserProfileData();
                     // Hide the save button
                     saveButton.setVisibility(View.GONE);
+                    // Navigate back to the main menu fragment
+                    navigateToMainMenuFragment();
+
+
                 }
             }
         });
@@ -109,5 +113,13 @@ public class UserProfileFragment extends Fragment {
         // Display the saved data in profileDataTextView
         String userProfileText = "Username: " + username + "\nAvatar Resource ID: " + avatarResourceId;
         profileDataTextView.setText(userProfileText);
+    }
+
+    // Method to navigate back to the main menu fragment
+    private void navigateToMainMenuFragment() {
+        MainMenuFragment mainMenuFragment = new MainMenuFragment();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, mainMenuFragment);
+        transaction.commit();
     }
 }
