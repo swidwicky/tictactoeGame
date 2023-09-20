@@ -47,12 +47,11 @@ public class MainMenuFragment extends Fragment {
         userProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserProfileFragment userProfileFragmentFragment = new UserProfileFragment();
+                UserProfileFragment userProfileFragment = new UserProfileFragment();
 
-                // Replace the current fragment with the GameFragment
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, userProfileFragmentFragment) // Use the ID of your fragment container
+                // Replace the current fragment with the UserProfileFragment
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, userProfileFragment) // Use the ID of your fragment container
                         .addToBackStack(null) // Optionally, add to the back stack for back navigation
                         .commit();
             }

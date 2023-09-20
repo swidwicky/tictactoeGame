@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class UserProfileFragment extends Fragment {
     private RecyclerView avatarSelectionRecyclerView;
     private Button saveButton;
     private Button backButton;
+    private TextView profileDataTextView;
     private int selectedAvatarResourceId = -1; // Added to store selected avatar resource ID
 
     @Nullable
@@ -36,6 +38,7 @@ public class UserProfileFragment extends Fragment {
         avatarSelectionRecyclerView = view.findViewById(R.id.avatarSelectionRecyclerView);
         saveButton = view.findViewById(R.id.saveButton);
         backButton = view.findViewById(R.id.backButton);
+        profileDataTextView = view.findViewById(R.id.profileDataTextView);
 
         // Set up RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
@@ -52,8 +55,7 @@ public class UserProfileFragment extends Fragment {
             public void onClick(View v) {
                 // Get the user input (username)
                 String username = userNameEditText.getText().toString();
-                int selectedAvatarResourceId = avatarAdapter.getSelectedAvatarResourceId();
-
+                selectedAvatarResourceId = avatarAdapter.getSelectedAvatarResourceId();
 
                 if (username.isEmpty()) {
                     // Show an error message or toast to inform the user
@@ -64,13 +66,10 @@ public class UserProfileFragment extends Fragment {
                 } else {
                     // Save the user profile data to SharedPreferences
                     saveUserProfileData(username, selectedAvatarResourceId);
-
-                    // Navigate to another fragment (replace FragmentToNavigateTo with your desired fragment)
-                    MainMenuFragment fragment = new MainMenuFragment();
-                    FragmentTransaction transaction = requireFragmentManager().beginTransaction();
-                    transaction.replace(R.id.UserProfileContainer, fragment);
-                    transaction.addToBackStack(null); // Optional: Add the transaction to the back stack
-                    transaction.commit();
+                    // Display the saved data in profileDataTextView
+                    displayUserProfileData();
+                    // Hide the save button
+                    saveButton.setVisibility(View.GONE);
                 }
             }
         });
@@ -99,5 +98,16 @@ public class UserProfileFragment extends Fragment {
         editor.putString("username", username);
         editor.putInt("avatarResourceId", selectedAvatarResourceId);
         editor.apply();
+    }
+
+    // Method to display saved user profile data in profileDataTextView
+    private void displayUserProfileData() {
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        int avatarResourceId = sharedPreferences.getInt("avatarResourceId", -1);
+
+        // Display the saved data in profileDataTextView
+        String userProfileText = "Username: " + username + "\nAvatar Resource ID: " + avatarResourceId;
+        profileDataTextView.setText(userProfileText);
     }
 }
