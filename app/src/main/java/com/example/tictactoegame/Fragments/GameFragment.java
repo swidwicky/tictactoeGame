@@ -139,6 +139,9 @@ public class GameFragment extends Fragment {
 
         roundCount++;
 
+        // Reset the timer after a move
+        startTimer();
+
         // Check for a win after each move
         if (checkWinCondition()) {
             // A player has won, handle the win
@@ -210,6 +213,7 @@ public class GameFragment extends Fragment {
         resetGame();
     }
 
+    // Modify the resetGame() method to reset the timer
     private void resetGame() {
         // Implement logic to reset the game
         player1Turn = true;
@@ -222,9 +226,33 @@ public class GameFragment extends Fragment {
             }
         }
 
-        // Reset the timer
-        startTimer();
+        // Cancel the previous timer if it's running
+        if (timer != null) {
+            timer.cancel();
+        }
+
+        // Set the initial timer duration here
+        secondsRemaining = this.secondsRemaining;
+        updateTimerDisplay(timerTextView, secondsRemaining * 1000); // Update the displayed timer
+
+        // Do not start the timer immediately, wait for a move
+        // Ensure that AI makes a move in AI mode after resetting
+        if (isAIMode && !player1Turn) {
+            aiPlayer.makeMove(buttons);
+            roundCount++;
+            player1Turn = true; // Switch back to the human player's turn
+
+            // Check for a win after AI's move
+            if (checkWinCondition()) {
+                String winningPlayer = "AI (O)";
+                playerWins(winningPlayer);
+            } else if (roundCount == 9) {
+                declareDraw();
+            }
+        }
     }
+
+
 
     private void navigateToMainMenuFragment() {
         MainMenuFragment mainMenuFragment = new MainMenuFragment();
@@ -237,7 +265,7 @@ public class GameFragment extends Fragment {
     private void switchGameMode() {
         // Switch between 2-player and AI mode
         isAIMode = !isAIMode;
-        resetGame();
+        resetGame(); // Reset the game, including the timer
     }
 
     // Add this method to update the game mode text
@@ -267,7 +295,7 @@ public class GameFragment extends Fragment {
                     // Handle the new time (e.g., update the timer duration)
                     if (newTimeInSeconds > 0) {
                         secondsRemaining = newTimeInSeconds;
-                        updateTimerDisplay(timerTextView, secondsRemaining * 1000); // Update the displayed timer
+                        updateTimerDisplay(timerTextView,secondsRemaining * 1000); // Update the displayed timer
                     } else {
                         // Handle invalid input (e.g., show an error message)
                         Toast.makeText(requireContext(), "Invalid input. Timer not updated.", Toast.LENGTH_SHORT).show();
@@ -276,6 +304,9 @@ public class GameFragment extends Fragment {
                     // Handle empty input (e.g., show an error message)
                     Toast.makeText(requireContext(), "Please enter a valid value.", Toast.LENGTH_SHORT).show();
                 }
+
+                // Reset the timer after adjusting
+                startTimer();
             }
         });
 
@@ -307,7 +338,6 @@ public class GameFragment extends Fragment {
             }
         }.start();
     }
-
     private void updateTimerDisplay(TextView timerTextView, long timeLeftInMillis) {
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
